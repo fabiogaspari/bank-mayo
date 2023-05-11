@@ -11,15 +11,17 @@ use Inertia\Inertia;
 
 abstract class CommonController implements IController
 {
-    protected string $classname;
     private const PATH_BASE = '';
-
+    protected string $classname;
+    
     public function __construct(
         private IService $service,
         private IRepository $repository,
         private Model $model
-    ){}
+    ) {}
 
+    abstract function validate(Request $req): \Illuminate\Validation\Validator;
+    
     public function index()
     {
         return Inertia::render(CommonController::PATH_BASE.$this->classname.'/Index');
@@ -75,7 +77,5 @@ abstract class CommonController implements IController
 
         return null;
     }
-
-    public abstract function validate(Request $req): \Illuminate\Validation\Validator;
 
 }

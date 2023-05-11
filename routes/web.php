@@ -63,7 +63,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::prefix('transactions')->name('transactions.')
-    ->middleware(['auth', 'verified', 'user.common'])    
+    ->middleware(['auth', 'verified', 'user.common'])
     ->group(function () {
         Route::get(config('constants.route.PATH_BASE'), fn() =>
             Inertia::render('Transaction/Index'))
@@ -88,7 +88,7 @@ Route::controller(TransactionController::class)
 });
 
 Route::post('/teste', function(Request $req) {
-    return CpfUtil::cpfValidation($req->cpf_cnpj) ? 'sim' : 'nao'; 
+    return CpfUtil::cpfValidation($req->cpf_cnpj) ? 'sim' : 'nao';
 })->name('teste');
 
 require __DIR__.'/auth.php';
