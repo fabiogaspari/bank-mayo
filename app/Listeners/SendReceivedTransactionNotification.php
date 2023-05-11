@@ -23,7 +23,7 @@ class SendReceivedTransactionNotification
      */
     public function handle(TransactionProcessed $event): void
     {
-        $user = User::where('id', $event->transaction->from_id)->first();
+        $user = User::where('id', $event->transaction->to_id)->first();
         $thirdService = Http::get('https://run.mocky.io/v3/4ce65eb0-2eda-4d76-8c98-8acd9cfd2d39');
 
         if (data_get($thirdService, 'message') != 'success') {
